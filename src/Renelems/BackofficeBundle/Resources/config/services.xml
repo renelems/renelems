@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="renelems.managers.password.admin" class="Renelems\BackofficeBundle\Manager\AdminPasswordManager">
+        </service>
+        <service id="renelems.managers.admin" class="Renelems\BackofficeBundle\Manager\AdminManager">
+            <argument type="service" id="doctrine" />
+            <argument type="service" id="security.encoder_factory" />
+        </service>
+
+    </services>
+</container>

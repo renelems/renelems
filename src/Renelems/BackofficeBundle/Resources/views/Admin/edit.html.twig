@@ -1,0 +1,73 @@
+{% extends 'RenelemsBackofficeBundle::layout.html.twig' %}
+
+{% block content %}
+<h1>Gebruiker bewerken</h1>
+
+<form action="{{ path('admin_admin_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+    <table id="top40_admin" class="editForm">
+        {{ form_errors(edit_form)}}
+        {{ form_row(edit_form._token)}}
+
+        {{ form_row(edit_form.name)}}
+        {{ form_row(edit_form.email)}}
+        {{ form_row(edit_form.newpassword)}}
+        {% if(is_granted('ROLE_ADMIN')) %}
+            {{ form_row(edit_form.published)}}
+            {{ form_row(edit_form.introduction)}}
+            {{ form_row(edit_form.content)}}
+            <tr>
+                <td>{{ form_label(edit_form.newImage)}}</td>
+                <td>
+                    {% if entity.image and entity.image|imageDimensionWidth > entity.image|cropMinWidth and entity.image|imageDimensionHeight > entity.image|cropMinHeight%}
+                    <a href="#" class="modal crop" title="Afbeelding uitknippen" data-width="530" data-height="600" data-url="{{path('admin_image_edit', {'id': entity.image.id })}}"><span class="icon_crop"></span>Afbeelding uitknippen</a>
+                    {% endif %}
+                    {% if entity.image and ((entity.image|cropMinWidth > 0 and entity.image|imageDimensionWidth < entity.image|cropMinWidth) or (entity.image|cropMinHeight > 0 and entity.image|imageDimensionHeight < entity.image|cropMinHeight)) %}
+                    {% if (entity.image|cropMinWidth > 0 and entity.image|imageDimensionWidth < entity.image|cropMinWidth) %}
+                        {% set sDimension = 'breedte' %}
+                        {% set sDimension2 = 'breed' %}
+                        {% set iDimension = entity.image|cropMinWidth %}
+                        {% set iCurrentDimension = entity.image|imageDimensionWidth %}
+                    {% else %}
+                        {% set sDimension = 'hoogte' %}
+                        {% set sDimension2 = 'hoog' %}
+                        {% set iDimension = entity.image|cropMinHeight %}
+                        {% set iCurrentDimension = entity.image|imageDimensionHeight %}
+                    {% endif %}
+                    <div class="error"><b>LET OP:</b> Deze afbeelding is <u>te klein</u> (minimale vereiste {{sDimension}} is {{iDimension}} pixels, deze afbeelding is {{iCurrentDimension}} pixels {{sDimension2}}).</div><br />
+                    {% endif %}
+                    {{ entity.image | imageFormat('default') | raw}}<br />
+                    {{ form_widget(edit_form.newImage)}}
+                    <br />
+                    {{ form_widget(edit_form.deleteImage)}} Verwijder?
+                </td>
+            </tr>
+        {% endif %}
+
+        {{form_rest(edit_form) }}
+    </table>
+    <p>
+        <button type="submit">Bijwerken</button>
+    </p>
+</form>
+
+
+
+
+
+<ul class="record_actions">
+    {% if(is_granted('ROLE_ADMIN')) %}
+    <li>
+        <a href="{{ path('admin_admin') }}">
+            &laquo; Terug naar de lijst
+        </a>
+    </li>
+    <li>
+        <form action="{{ path('admin_admin_delete', { 'id': entity.id }) }}" method="post" onsubmit="if(window.confirm('Weet je zeker dat je wilt verwijderen?')){return true;}else{return false;};">
+            {{ form_widget(delete_form) }}
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+    {% endif %}
+</ul>
+
+{% endblock %}

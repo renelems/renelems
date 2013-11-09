@@ -1,0 +1,33 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Admin{% endblock %}
+{% block stylesheets %}
+	{{ parent() }}
+	<link href="/css/admin.css" rel="stylesheet" />
+
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script src="/bundles/dsjeventinvitebackoffice/js/admin.js"></script>
+{% endblock %}
+
+{% block body %}
+	<div id="leftColumn">
+		<h3 class="header-title"><span class="fui-mail"></span> Event<span>Invite</span></h3>
+		{% block menu %}
+			<ul class="menu">
+				<li><a href="{{ path("admin_logout") }}">Logout</a></li>
+			</ul>
+			<ul class="menu">
+				<li><a href="{{ path("admin_admin") }}">Admins</a></li>
+			</ul>
+		{% endblock %}
+	</div>
+	<div id="content_wrapper">
+    	<div class="content">
+			{% block content %}
+			{% endblock %}
+		</div>
+	</div>			
+{% endblock %}

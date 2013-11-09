@@ -1,0 +1,28 @@
+{% extends 'RenelemsBackofficeBundle::layout.html.twig' %}
+
+{% block content %}
+
+    <h1>Gebruikers</h1>
+    
+    <table class="chart" cellpadding="0" cellspacing="0">
+        <tr>
+            <th>ID</th>
+            <th>Naam</th>
+            <th>E-mailadres</th>
+            <th>Niveau</th>
+            <th>Bewerken</th>
+        </tr>
+        {% for admin in entities %}
+            <tr>
+                <td>{{admin.id}}</td>
+                <td>{{admin.name}}</td>
+                <td>{{admin.email}}</td>
+                <td>{{admin.type}}</td>
+                <td><a href="{{path('admin_admin_edit', {id: admin.id })}}">bewerken</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <a href="{{path('admin_admin_new')}}">Nieuwe gebruiker</a>
+
+{% endblock %}

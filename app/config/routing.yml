@@ -1,0 +1,4 @@
+renelems_backoffice:
+    resource: "@RenelemsBackofficeBundle/Controller/"
+    type:     annotation
+    prefix:   /admin
