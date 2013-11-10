@@ -5,6 +5,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 use Symfony\Component\Security\Core\SecurityContextInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 use Renelems\DBBundle\Entity\Admin;
 
@@ -25,12 +26,15 @@ class AdminType extends AbstractType
             self::ADMIN_TYPE_ADMIN => 'Beheerder',
         );
 
-            $builder->add('type', 'choice', array( 'label' => 'Niveau', 'choices' => $aAdminTypes));
+        $builder->add('type', 'choice', array( 'label' => 'Niveau', 'choices' => $aAdminTypes, 'constraints' => array(new Assert\NotBlank(array('message' => 'Verplicht veld')))));
         
         $builder
-            ->add('name', null, array('label'=>'Naam'))
-            ->add('email', null, array('label'=>'E-mailadres'))
-            ->add('newpassword', 'password', array( 'label' => 'Wachtwoord (laat veld leeg als je deze niet wilt wijzigen)', 'required' => false))
+            ->add('name', null, array('label'=>'Naam', 'required' => true, 'constraints' => array(new Assert\NotBlank(array('message' => 'Verplicht veld')))))
+            ->add('email', null, array('label'=>'E-mailadres', 'required' => true, 'constraints' => array(new Assert\NotBlank(array('message' => 'Verplicht veld')), new Assert\Email(array(
+		        	'message' => 'Ongeldig e-mailadres',
+		            'checkMX' => true
+	        )))))
+            ->add('newpassword', 'password', array( 'label' => 'Wachtwoord', 'required' => true, 'constraints' => array(new Assert\NotBlank(array('message' => 'Verplicht veld')))))
             ->add('active', null, array('label' => 'Actief', 'required' => false))
             ->add('roles', 'choice', array('label' => 'Rechten', 'choices' => Admin::$aRoles, 'multiple' => true, 'expanded' => true));
         

@@ -1,22 +1,22 @@
 {% extends 'RenelemsBackofficeBundle::layout.html.twig' %}
 
 {% block content %}
+<div class="record_actions">
+	<a href="{{ path('admin_admin') }}">&laquo; Terug naar de lijst</a>
+</div>
 
-<h1>Gebruiker aanmaken</h1>
+<h2>Gebruiker aanmaken</h2>
 
-<form action="{{ path('admin_admin_create') }}" method="post" {{ form_enctype(form) }}>
+{% include "RenelemsBackofficeBundle:Partials:notice.html.twig" %}
+
+<form action="{{ path('admin_admin_create') }}" method="post" {{ form_enctype(form) }} id="new_form">
     {{ form_widget(form) }}
     <p>
         <button type="submit">Aanmaken</button>
     </p>
 </form>
 
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('admin_admin') }}">
-            &laquo; Terug naar de lijst
-        </a>
-    </li>
-</ul>
-
+<div class="record_actions">
+    <a href="{{ path('admin_admin') }}">&laquo; Terug naar de lijst</a>
+</div>
 {% endblock %}

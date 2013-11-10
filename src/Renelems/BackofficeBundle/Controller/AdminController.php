@@ -65,7 +65,7 @@ class AdminController extends Controller
      * @Route("/create", name="admin_admin_create")
      * @Method("post")
      * @Secure(roles="ROLE_ADMIN")
-     * @Template("DSJEventInviteBackofficeBundle:Admin:new.html.twig")
+     * @Template("RenelemsBackofficeBundle:Admin:new.html.twig")
      */
     public function createAction()
     {
@@ -168,14 +168,15 @@ class AdminController extends Controller
 
                 $em->flush();
                 
-                if($this->get('security.context')->isGranted('ROLE_ADMIN'))
-                {
-                    return $this->redirect($this->generateUrl('admin_admin'));
-                }
-                else
-                {
-                    return $this->redirect($this->generateUrl('admin_system'));
-                }
+                $this->get('session')->getFlashBag()->add(
+                	'notice',
+                	'Wijzigingen opgeslagen!'
+                );
+            } else {
+            	$this->get('session')->getFlashBag()->add(
+            		'error',
+            		'Wijzigingen niet opgeslagen!'
+            	);
             }
 
             return array(
@@ -195,29 +196,25 @@ class AdminController extends Controller
      *
      * @Route("/{id}/delete", name="admin_admin_delete")
      * @Secure(roles="ROLE_ADMIN")
-     * @Method("post")
      */
-    public function deleteAction($id)
+    public function deleteAction(Admin $entity)
     {
         $oLoggableListener = $this->get('stof_doctrine_extensions.listener.loggable');
         $oLoggableListener->setUsername($this->get('security.context')->getToken()->getUsername());
-        $form = $this->createDeleteForm($id);
-        $request = $this->getRequest();
-
-        $form->bind($request);
-
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('RenelemsDBBundle:Admin')->find($id);
-
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Admin entity.');
-            }
-            
-            $em->remove($entity);
-            $em->flush();
-        }
-
+	
+        if (!$entity) {
+        	throw $this->createNotFoundException('Unable to find Admin entity.');
+		}
+		
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($entity);
+        $em->flush();
+        
+        $this->get('session')->getFlashBag()->add(
+			'notice',
+        	'Gebruiker is verwijderd!'
+        );
+		
         return $this->redirect($this->generateUrl('admin_admin'));
     }
 

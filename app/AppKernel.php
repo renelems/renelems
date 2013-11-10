@@ -18,6 +18,7 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Renelems\DBBundle\RenelemsDBBundle(),
         	new Renelems\BackofficeBundle\RenelemsBackofficeBundle(),
+        	new Renelems\WebsiteBundle\RenelemsWebsiteBundle(),
         	new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
         	new JMS\AopBundle\JMSAopBundle(),
         	new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),

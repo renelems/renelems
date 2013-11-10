@@ -2,27 +2,32 @@
 
 {% block content %}
 
-    <h1>Gebruikers</h1>
+    <h2>Gebruikers</h2>
+    
+	{% include "RenelemsBackofficeBundle:Partials:notice.html.twig" %}
     
     <table class="chart" cellpadding="0" cellspacing="0">
-        <tr>
+        <tr class="head">
             <th>ID</th>
             <th>Naam</th>
             <th>E-mailadres</th>
             <th>Niveau</th>
-            <th>Bewerken</th>
+            <th class="text_center">Acties</th>
         </tr>
         {% for admin in entities %}
-            <tr>
+            <tr class="{{ cycle(['odd', 'even'], loop.index) }}">
                 <td>{{admin.id}}</td>
                 <td>{{admin.name}}</td>
                 <td>{{admin.email}}</td>
                 <td>{{admin.type}}</td>
-                <td><a href="{{path('admin_admin_edit', {id: admin.id })}}">bewerken</a></td>
+                <td class="last">
+                	<a href="{{path('admin_admin_edit', {id: admin.id })}}" class="btn edit"><i class="fa fa-pencil-square"></i> Bewerken</a>
+                	<a onclick="return window.confirm('weet je zeker dat je {{ admin.name }} als gebruiker wilt verwijderen?');" href="{{path('admin_admin_delete', {id: admin.id })}}" class="btn delete"><i class="fa fa-trash-o"></i> Verwijderen</a>
+                </td>
             </tr>
         {% endfor %}
     </table>
 
-    <a href="{{path('admin_admin_new')}}">Nieuwe gebruiker</a>
+    <a href="{{path('admin_admin_new')}}" class="btn add"><i class="fa fa-plus-square"></i> Nieuwe gebruiker</a>
 
 {% endblock %}

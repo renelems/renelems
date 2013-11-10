@@ -1,0 +1,3 @@
+twig:
+    form:
+        resources: ['form_table_layout.html.twig']

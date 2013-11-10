@@ -1,0 +1,222 @@
+body, html, h1, h2, h3, h4, h5, h6, p, a, ul, li {margin: 0; padding: 0;}
+
+body {
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font-size: 14px;
+}
+
+@font-face {
+    font-family: 'OratorStd';
+    src: url('/bundles/renelemswebsite/font/oratorstd.eot');
+    src: url('/bundles/renelemswebsite/font/oratorstd.eot') format('embedded-opentype'),
+         url('/bundles/renelemswebsite/font/oratorstd.woff') format('woff'),
+         url('/bundles/renelemswebsite/font/oratorstd.ttf') format('truetype'),
+         url('/bundles/renelemswebsite/font/oratorstd.svg#OratorStdMedium') format('svg');
+}
+
+h1 {
+	font-family: 'OratorStd';
+	font-weight: normal;
+	text-transform: uppercase;
+	color: #FFFFFF;
+	font-size: 32px;
+}
+
+h2 {
+	font-family: 'OratorStd';
+	font-weight: normal;
+	text-transform: uppercase;
+	color: #353230;
+	font-size: 28px;
+	margin: 10px 0px;
+}
+
+a {
+	color: #3DA1C0;
+}
+
+a:hover {
+	color: #353230;
+}
+
+/* STANDARD */
+
+.text_center {
+	text-align: center;
+}
+
+/* NOTICES */
+.flash_notice {
+	height: 30px;
+	color: #00A200;
+	font-weight: bold;
+	font-size: 16px;
+}
+
+.flash_error {
+	height: 30px;
+	color: #EB0000;
+	font-weight: bold;
+	font-size: 16px;
+}
+
+
+/* TOPBAR/MENU */
+
+#topBar {
+	background-color: #3DA1C0;
+	padding: 20px;
+	height: 30px;
+}
+
+#topBar h1 {
+	float: left;
+}
+
+#topBar ul li,
+#menu ul li {
+	list-style-type: none;
+}
+
+#topBar ul li a {
+	color: #FFFFFF;
+}
+
+#topBar .logout {
+	float:right;
+}
+
+#menu {
+	width: 100%;
+	height: 30px;
+	background-color: #e0e0e0;
+}
+
+#menu ul {
+	margin-left: 50px;
+}
+
+#menu ul li {
+	float:left;
+	padding: 6px 0px;
+	border-left: 1px solid #bfbebe;
+}
+
+#menu ul li.end {
+	border-right: 1px solid #bfbebe;
+}
+
+#menu ul li a {
+	color: #353230;
+	text-decoration: none;
+	font-size: 15px;
+	text-transform: uppercase;
+	padding: 6px 20px;
+	letter-spacing: 3px;
+}
+
+#menu ul li a:hover {
+	background-color: #bfbebe;
+	color: #FFFFFF;
+}
+
+#content_wrapper {
+	padding: 30px;
+}
+
+/* TABLES */
+
+table tr.odd {
+	background-color: #EBEBEB;
+}
+
+table tr td,
+table tr th {
+	padding: 7px 10px;
+	font-weight: normal;
+	text-align: left;
+}
+
+table tr td.last {
+	padding: 7px 0px;
+}
+
+table tr.head {
+	background-color: #353230;
+	color: #FFFFFF;
+	font-size: 15px;
+}
+
+#edit_form table,
+#new_form table {
+	border-spacing: 5px;
+}
+
+#edit_form table tr td,
+#new_form table tr td {
+	padding: 0px 10px;
+	height: 35px;
+}
+
+#edit_form table tr td:first-child,
+#new_form table tr td:first-child {
+	background-color: #EBEBEB;
+}
+
+/* FORMS */
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+	padding: 4px 8px;
+	font-size: 14px;
+	border: 1px solid #ECECEC;
+	height: 20px;
+}
+
+select {
+	height: 30px;
+	font-size: 14px;
+	border: 1px solid #ECECEC;
+	width:100%;
+	padding-left: 8px;
+}
+
+/* BUTTONS */
+a.btn {
+	padding: 5px 10px;
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+a.btn:hover {
+	opacity: 0.7;
+	filter: alpha(70);
+}
+
+a.btn.add {
+	background-color: #00A200;
+	margin-top: 20px;
+	float: left;
+}
+
+a.btn.edit {
+	background-color: #EBCE00;
+}
+
+a.btn.delete {
+	background-color: #EB0000;
+}
+
+
+form button[type="submit"] {
+	background-color: #FFAD00;
+	border: 0px;
+	color: #FFFFFF;
+	padding: 7px 15px;
+	cursor: pointer;
+}
+
+form button[type="submit"]:hover {
+	opacity: 0.7;
+	filter: alpha(70)
+}

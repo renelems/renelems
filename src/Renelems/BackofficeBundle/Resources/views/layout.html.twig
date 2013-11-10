@@ -3,27 +3,32 @@
 {% block title %}Admin{% endblock %}
 {% block stylesheets %}
 	{{ parent() }}
-	<link href="/css/admin.css" rel="stylesheet" />
+	<link href="/bundles/renelemsbackoffice/css/admin.css" rel="stylesheet" />
+	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 
 {% endblock %}
 
 {% block javascripts %}
 	{{ parent() }}
-	<script src="/bundles/dsjeventinvitebackoffice/js/admin.js"></script>
+	<script src="/bundles/renelemsbackoffice/js/admin.js"></script>
 {% endblock %}
 
 {% block body %}
-	<div id="leftColumn">
-		<h3 class="header-title"><span class="fui-mail"></span> Event<span>Invite</span></h3>
-		{% block menu %}
-			<ul class="menu">
-				<li><a href="{{ path("admin_logout") }}">Logout</a></li>
-			</ul>
-			<ul class="menu">
-				<li><a href="{{ path("admin_admin") }}">Admins</a></li>
-			</ul>
-		{% endblock %}
+	<div id="topBar">
+		<h1>Renelems.nl</h1>
+		<ul class="logout">
+			<li><a href="{{ path("admin_logout") }}">Uitloggen</a></li>
+		</ul>
 	</div>
+	{% block menu %}
+	<div id="menu">
+		<ul>
+			<li><a href="{{ path("admin_admin") }}">Gebruikers</a></li>
+			<li><a href="{{ path("admin_admin") }}">Gebruikers</a></li>
+			<li class="end"><a href="{{ path("admin_admin") }}">Gebruikers</a></li>
+		</ul>
+	</div>
+	{% endblock %}
 	<div id="content_wrapper">
     	<div class="content">
 			{% block content %}
