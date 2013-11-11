@@ -2,21 +2,21 @@
 
 {% block content %}
 <div class="record_actions">
-    <a href="{{ path('admin_admin') }}">&laquo; Terug naar de lijst</a>
+    <a href="{{ path('admin_project') }}">&laquo; Terug naar de lijst</a>
 </div>
 
-<h2>Gebruiker bewerken</h2>
+<h2>Project bewerken</h2>
 
 {% include "RenelemsBackofficeBundle:Partials:notice.html.twig" %}
 
-<form action="{{ path('admin_admin_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }} id="edit_form">
+<form action="{{ path('admin_project_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }} id="edit_form">
     {{ form_errors(edit_form)}}
     {{ form_widget(edit_form)}}
     <button type="submit"><i class="fa fa-floppy-o"></i> Bijwerken</button>
 </form>
 
 <div class="record_actions">
-    <a href="{{ path('admin_admin') }}">&laquo; Terug naar de lijst</a>
+    <a href="{{ path('admin_project') }}">&laquo; Terug naar de lijst</a>
 </div>
 
 {% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'RenelemsBackofficeBundle::layout.html.twig' %}
+
+{% block content %}
+
+    <h2>Projecten</h2>
+    
+	{% include "RenelemsBackofficeBundle:Partials:notice.html.twig" %}
+    
+    <table class="chart" cellpadding="0" cellspacing="0">
+        <tr class="head">
+            <th>ID</th>
+            <th>Titel</th>
+            <th>Website</th>
+            <th>Actief</th>
+            <th class="text_center">Acties</th>
+        </tr>
+        {% for entity in entities %}
+            <tr class="{{ cycle(['odd', 'even'], loop.index) }}">
+                <td>{{entity.id}}</td>
+                <td>{{entity.title}}</td>
+                <td>{{entity.website}}</td>
+                <td>{{entity.active}}</td>
+                <td class="last">
+                	<a href="{{path('admin_project_edit', {id: entity.id })}}" class="btn edit"><i class="fa fa-pencil-square"></i> Bewerken</a>
+                	<a onclick="return window.confirm('weet je zeker dat je {{ entity.title }} als project wilt verwijderen?');" href="{{path('admin_project_delete', {id: entity.id })}}" class="btn delete"><i class="fa fa-trash-o"></i> Verwijderen</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <a href="{{path('admin_project_new')}}" class="btn add"><i class="fa fa-plus-square"></i> Nieuw Project</a>
+
+{% endblock %}

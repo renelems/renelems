@@ -2,14 +2,14 @@
 
 {% block content %}
 <div class="record_actions">
-	<a href="{{ path('admin_admin') }}">&laquo; Terug naar de lijst</a>
+	<a href="{{ path('admin_project') }}">&laquo; Terug naar de lijst</a>
 </div>
 
-<h2>Gebruiker aanmaken</h2>
+<h2>Project aanmaken</h2>
 
 {% include "RenelemsBackofficeBundle:Partials:notice.html.twig" %}
 
-<form action="{{ path('admin_admin_create') }}" method="post" {{ form_enctype(form) }} id="new_form">
+<form action="{{ path('admin_project_create') }}" method="post" {{ form_enctype(form) }} id="new_form">
     {{ form_widget(form) }}
     <p>
         <button type="submit"><i class="fa fa-floppy-o"></i> Aanmaken</button>
@@ -17,6 +17,6 @@
 </form>
 
 <div class="record_actions">
-    <a href="{{ path('admin_admin') }}">&laquo; Terug naar de lijst</a>
+    <a href="{{ path('admin_project') }}">&laquo; Terug naar de lijst</a>
 </div>
 {% endblock %}

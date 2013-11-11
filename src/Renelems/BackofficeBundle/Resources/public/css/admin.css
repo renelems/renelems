@@ -169,8 +169,17 @@ input[type="password"],
 input[type="email"] {
 	padding: 4px 8px;
 	font-size: 14px;
-	border: 1px solid #ECECEC;
+	border: 1px solid #D1D1D1;
 	height: 20px;
+	width: 400px
+}
+
+textarea {
+	padding: 4px 8px;
+	font-size: 14px;
+	border: 1px solid #D1D1D1;
+	width: 400px;
+	height: 125px;
 }
 
 select {
@@ -214,6 +223,7 @@ form button[type="submit"] {
 	color: #FFFFFF;
 	padding: 7px 15px;
 	cursor: pointer;
+	font-size: 15px;
 }
 
 form button[type="submit"]:hover {
