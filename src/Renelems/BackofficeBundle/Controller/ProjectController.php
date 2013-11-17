@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Doctrine\ORM\EntityManager;
 
 use Renelems\DBBundle\Entity\Project;
+use Renelems\DBBundle\Entity\ProjectImage;
 use Renelems\BackofficeBundle\Form\ProjectType;
 
 /**
@@ -112,9 +113,9 @@ class ProjectController extends Controller
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Project entity.');
             }
-
+			
             $editForm = $this->createForm(new ProjectType($this->get('security.context')), $entity);
-
+			
             return array(
                 'entity'      => $entity,
                 'edit_form'   => $editForm->createView(),
@@ -153,10 +154,27 @@ class ProjectController extends Controller
             $editForm   = $this->createForm(new ProjectType($this->get('security.context')), $entity);
 
             $request = $this->getRequest();
-
+			
+            foreach($request->files->get('renelems_dbbundle_project') as $files) {
+            	$files = $files[0]['file'];
+            }
+            $request->files->set('renelems_dbbundle_project', array('images' => array(NULL)));
             $editForm->bind($request);
-
+            
             if ($editForm->isValid()) {
+            	
+            	foreach($files as $file) {
+            		$oImage = new ProjectImage();
+            		$oImage->setFile($file);
+            		$oImage->setType('overview');
+            		$oImage->setProject($entity);
+            		$entity->addImage($oImage);
+            	}
+                //$em->persist($entity);
+                //$em->flush();
+                
+                //$images = $entity->getImages();
+                
                 $em->persist($entity);
                 $em->flush();
                 

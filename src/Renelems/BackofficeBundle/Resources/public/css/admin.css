@@ -31,6 +31,15 @@ h2 {
 	margin: 10px 0px;
 }
 
+h3 {
+	font-family: 'OratorStd';
+	font-weight: normal;
+	text-transform: uppercase;
+	color: #353230;
+	font-size: 25px;
+	margin: 0px;
+}
+
 a {
 	color: #3DA1C0;
 }
@@ -39,11 +48,25 @@ a:hover {
 	color: #353230;
 }
 
-/* STANDARD */
 
+/* STANDARD */
 .text_center {
 	text-align: center;
 }
+
+.fa-check {
+	font-size: 18px;
+	color: #00A200;
+}
+.fa-times {
+	font-size: 18px;
+	color: #EB0000;
+}
+
+.clear {
+	clear: both;
+}
+
 
 /* NOTICES */
 .flash_notice {
@@ -62,7 +85,6 @@ a:hover {
 
 
 /* TOPBAR/MENU */
-
 #topBar {
 	background-color: #3DA1C0;
 	padding: 20px;
@@ -80,6 +102,10 @@ a:hover {
 
 #topBar ul li a {
 	color: #FFFFFF;
+}
+
+#topBar ul li a:hover {
+	color: #353230;
 }
 
 #topBar .logout {
@@ -124,8 +150,8 @@ a:hover {
 	padding: 30px;
 }
 
-/* TABLES */
 
+/* TABLES */
 table tr.odd {
 	background-color: #EBEBEB;
 }
@@ -138,7 +164,7 @@ table tr th {
 }
 
 table tr td.last {
-	padding: 7px 0px;
+	padding: 3px 0px;
 }
 
 table tr.head {
@@ -162,6 +188,7 @@ table tr.head {
 #new_form table tr td:first-child {
 	background-color: #EBEBEB;
 }
+
 
 /* FORMS */
 input[type="text"],
@@ -190,43 +217,84 @@ select {
 	padding-left: 8px;
 }
 
+.images {
+	width: 560px;
+}
+
+
 /* BUTTONS */
 a.btn {
-	padding: 5px 10px;
+	padding: 6px 10px 7px 0px;
 	color: #FFFFFF;
 	text-decoration: none;
 }
 
-a.btn:hover {
-	opacity: 0.7;
-	filter: alpha(70);
+a.btn.add {
+	background-color: #004B00;
+	margin-top: 20px;
 }
 
-a.btn.add {
+a.btn.add:hover {
 	background-color: #00A200;
-	margin-top: 20px;
-	float: left;
+}
+
+a.btn.add .fa {
+	padding: 8px 10px;
+	background-color: #00A200;
+	margin-right: 5px;
+	color: #004B00;
 }
 
 a.btn.edit {
+	background-color: #BE9900;
+}
+
+a.btn.edit:hover {
 	background-color: #EBCE00;
 }
 
+a.btn.edit .fa {
+	padding: 8px 10px;
+	background-color: #EBCE00;
+	margin-right: 5px;
+	color: #BE9900;
+}
+
 a.btn.delete {
+	background-color: #AC0F0F;
+}
+
+a.btn.delete:hover {
 	background-color: #EB0000;
 }
 
+a.btn.delete.pull-right {
+	padding: 0px 10px 0px 0px;
+}
+
+a.btn.delete .fa {
+	padding: 8px 10px;
+	background-color: #EB0000;
+	margin-right: 5px;
+	color: #AC0F0F;
+}
 
 form button[type="submit"] {
-	background-color: #FFAD00;
+	background-color: #B17A08;
 	border: 0px;
 	color: #FFFFFF;
-	padding: 7px 15px;
+	padding: 0px 10px 0px 0px;
 	cursor: pointer;
 	font-size: 15px;
 }
 
 form button[type="submit"]:hover {
-	opacity: 0.7;
-	filter: alpha(70)
+	background-color: #FFAD00;
+}
+
+form button[type="submit"] .fa {
+	color: #B17A08;
+	background-color: #FFAD00;
+	padding: 8px 10px;
+	margin-right: 5px;
 }

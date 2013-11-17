@@ -10,13 +10,22 @@
 {% include "RenelemsBackofficeBundle:Partials:notice.html.twig" %}
 
 <form action="{{ path('admin_project_create') }}" method="post" {{ form_enctype(form) }} id="new_form">
-    {{ form_widget(form) }}
-    <p>
-        <button type="submit"><i class="fa fa-floppy-o"></i> Aanmaken</button>
-    </p>
+	{% do form.images.setRendered %}
+    <div class="pull-left">
+	    {{ form_widget(form)}}
+    </div>
+    <div class="pull-right">
+	    <div class="images" data-prototype="{{ form_widget(form.images.vars.prototype)|e }}">
+		    <h3>Afbeeldingen</h3>
+	        {% for image in form.images %}
+	            {{ form_widget(image) }}
+	        {% endfor %}
+	    </div>
+    </div>
+    <button type="submit" class="pull-left clear"><i class="fa fa-floppy-o"></i> Aanmaken</button>
 </form>
 
-<div class="record_actions">
+<div class="record_actions clear">
     <a href="{{ path('admin_project') }}">&laquo; Terug naar de lijst</a>
 </div>
 {% endblock %}

@@ -101,7 +101,17 @@ class Project
      */
     protected $active;
     
+    /**
+     * @ORM\OneToMany(targetEntity="ProjectImage", mappedBy="project", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    private $images;
+    
 
+    public function __construct()
+    {
+    	$this->images = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
     /**
      * Get id
      *
@@ -317,5 +327,71 @@ class Project
     public function getWebsite()
     {
         return $this->website;
+    }
+
+    /**
+     * Add images
+     *
+     * @param \Renelems\DBBundle\Entity\ProjectImage $images
+     * @return Project
+     */
+    public function addImage($image)
+    {
+        $this->images->add($image);
+    
+        return $this;
+    }
+
+    /**
+     * Remove images
+     *
+     * @param \Renelems\DBBundle\Entity\ProjectImage $images
+     */
+    public function removeImage(\Renelems\DBBundle\Entity\ProjectImage $images)
+    {
+        $this->images->removeElement($images);
+    }
+
+    /**
+     * Get images
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getImages()
+    {
+        return $this->images;
+    }
+    
+    /**
+     * Add images
+     *
+     * @param \Renelems\DBBundle\Entity\ProjectImage $images
+     * @return Project
+     */
+    public function addLogo(\Renelems\DBBundle\Entity\ProjectImage $image)
+    {
+    	$this->images->add($image);
+    
+    	return $this;
+    }
+    
+    /**
+     * Remove images
+     *
+     * @param \Renelems\DBBundle\Entity\ProjectImage $images
+     */
+    public function removeLogo(\Renelems\DBBundle\Entity\ProjectImage $images)
+    {
+    	$this->images->removeElement($images);
+    }
+    
+    /**
+     * Get images
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLogo()
+    {
+    	return $this->images;
     }
 }

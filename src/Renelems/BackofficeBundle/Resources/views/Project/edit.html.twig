@@ -10,12 +10,25 @@
 {% include "RenelemsBackofficeBundle:Partials:notice.html.twig" %}
 
 <form action="{{ path('admin_project_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }} id="edit_form">
-    {{ form_errors(edit_form)}}
-    {{ form_widget(edit_form)}}
-    <button type="submit"><i class="fa fa-floppy-o"></i> Bijwerken</button>
+	{% do edit_form.images.setRendered %}
+	<div class="pull-right">
+	    <div class="images" data-prototype="{{ form_widget(edit_form.images.vars.prototype)|e }}">
+		    <h3>Afbeeldingen</h3>
+		    <div class="imageList">
+	        {% for image in entity.images %}
+	            <img src="/{{ project_image_dir }}{{ image.path }}" />
+	        {% endfor %}
+	        </div>
+	    </div>
+    </div>
+	<div class="pull-left">
+	    {{ form_widget(edit_form)}}
+    </div>
+    
+    <button type="submit" class="pull-left clear"><i class="fa fa-floppy-o"></i> Bijwerken</button>
 </form>
 
-<div class="record_actions">
+<div class="record_actions clear">
     <a href="{{ path('admin_project') }}">&laquo; Terug naar de lijst</a>
 </div>
 
