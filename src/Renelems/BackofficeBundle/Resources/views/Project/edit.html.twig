@@ -23,13 +23,11 @@
     </div>
 	<div class="pull-left">
 	    {{ form_widget(edit_form)}}
+	    <button type="submit" class="pull-left clear"><i class="fa fa-floppy-o"></i> Bijwerken</button>
+	    <div class="record_actions clear">
+		    <a href="{{ path('admin_project') }}">&laquo; Terug naar de lijst</a>
+		</div>
     </div>
-    
-    <button type="submit" class="pull-left clear"><i class="fa fa-floppy-o"></i> Bijwerken</button>
 </form>
-
-<div class="record_actions clear">
-    <a href="{{ path('admin_project') }}">&laquo; Terug naar de lijst</a>
-</div>
 
 {% endblock %}

@@ -101,7 +101,17 @@ class Project
      */
     protected $active;
     
+    /**
+     * @ORM\OneToMany(targetEntity="ProjectImage", mappedBy="project", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    private $images;
+    
 
+    public function __construct()
+    {
+    	$this->images = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
     /**
      * Get id
      *
