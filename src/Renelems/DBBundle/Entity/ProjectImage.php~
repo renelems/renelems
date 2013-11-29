@@ -39,7 +39,7 @@ class ProjectImage
      */
     private $locale;
     
-    private $file;
+    private $file = array();
     
     /**
      * @var \DateTime
@@ -56,6 +56,13 @@ class ProjectImage
      * @ORM\Column(name="updated", type="datetime")
      */
     private $updated;
+    
+    /**
+     * @var integer $sequence
+     *
+     * @ORM\Column(name="sequence", type="integer", nullable=true)
+     */
+    private $sequence;
     
     /**
      * @var Project
@@ -225,12 +232,13 @@ class ProjectImage
     	if (null === $this->getFile()) {
     		return;
     	}
-    
+    	
     	// if there is an error when moving the file, an exception will
         // be automatically thrown by move(). This will properly prevent
         // the entity from being persisted to the database on error
         $this->getFile()->move($this->getUploadRootDir(), $this->path);
-
+        $this->createThumbnail($this->getPath(), $this->getUploadRootDir(), 200);
+        
         // check if we have an old image
         if (isset($this->temp)) {
             // delete the old image
@@ -249,5 +257,76 @@ class ProjectImage
     	if ($file = $this->getAbsolutePath()) {
     		//unlink($file);
     	}
+    }
+    
+    private function createThumbnail($src, $dest, $desired_width) {
+		/* read the source image */
+		$source_image = imagecreatefromjpeg($dest."/".$src);
+		$width = imagesx($source_image);
+		$height = imagesy($source_image);
+		
+		/* find the "desired height" of this thumbnail, relative to the desired width  */
+		$desired_height = floor($height * ($desired_width / $width));
+		
+		/* create a new, "virtual" image */
+		$virtual_image = imagecreatetruecolor($desired_width, $desired_height);
+		
+		/* copy source image at a resized size */
+		imagecopyresampled($virtual_image, $source_image, 0, 0, 0, 0, $desired_width, $desired_height, $width, $height);
+		
+		$dest_new = $dest."/thumb_".$desired_width;
+		if (!file_exists($dest_new)) {
+			if(!mkdir($dest_new,0777,true))
+				var_dump("dir not created");
+		}
+		
+		/* create the physical thumbnail image to its destination */
+		imagejpeg($virtual_image, $dest_new."/".$src, 100);
+	}
+
+    /**
+     * Set created
+     *
+     * @param \DateTime $created
+     * @return ProjectImage
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+    
+        return $this;
+    }
+
+    /**
+     * Get created
+     *
+     * @return \DateTime 
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * Set updated
+     *
+     * @param \DateTime $updated
+     * @return ProjectImage
+     */
+    public function setUpdated($updated)
+    {
+        $this->updated = $updated;
+    
+        return $this;
+    }
+
+    /**
+     * Get updated
+     *
+     * @return \DateTime 
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
     }
 }

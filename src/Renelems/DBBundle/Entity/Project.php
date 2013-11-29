@@ -103,6 +103,7 @@ class Project
     
     /**
      * @ORM\OneToMany(targetEntity="ProjectImage", mappedBy="project", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OrderBy({"sequence" = "asc"})
      */
     private $images;
     

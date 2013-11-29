@@ -1,5 +1,25 @@
 {% extends 'RenelemsBackofficeBundle::layout.html.twig' %}
 
+{% block javascripts %}
+	{{ parent() }}
+	<script src="//code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+	<script type="text/javascript">
+	$(function() {
+		var oldPosition = null;
+		$( "#sortable" ).sortable({
+			start: function ( e, ui ) {
+				oldPosition = ui.item.index();
+			},
+			update: function ( e, ui ) {
+				var newPosition = ui.item.index();
+				updateImagePosition(ui.item, newPosition, oldPosition);
+			}
+		});
+		$( "#sortable" ).disableSelection();
+	});
+	</script>
+{% endblock %}
+
 {% block content %}
 <div class="record_actions">
     <a href="{{ path('admin_project') }}">&laquo; Terug naar de lijst</a>
@@ -14,11 +34,15 @@
 	<div class="pull-right">
 	    <div class="images" data-prototype="{{ form_widget(edit_form.images.vars.prototype)|e }}">
 		    <h3>Afbeeldingen</h3>
-		    <div class="imageList">
+		    <div id="addImage"></div>
+		    <ul class="imageList" id="sortable">
 	        {% for image in entity.images %}
-	            <img src="/{{ project_image_dir }}{{ image.path }}" />
+	        	<li class="ProjectImage_{{ image.id }}">
+	            	<img src="/{{ project_image_dir }}/thumb_{{ thumbnail_width }}/{{ image.path }}" />
+	            	<a onclick="if(confirm('Weet je zeker dat je deze afbeelding wilt verwijderen?')) removeImage(this)" class="removeImage" data-id="{{ image.id }}" data-object="ProjectImage"><i class="fa fa-times"></i></a>
+	            </li>
 	        {% endfor %}
-	        </div>
+	        </ul>
 	    </div>
     </div>
 	<div class="pull-left">

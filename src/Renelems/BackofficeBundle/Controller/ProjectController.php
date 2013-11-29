@@ -162,13 +162,22 @@ class ProjectController extends Controller
             $editForm->bind($request);
             
             if ($editForm->isValid()) {
+            	$lastImage = $em->getRepository('RenelemsDBBundle:ProjectImage')->findOneBy(array("project" => $entity), array("sequence" => "DESC"));
+            	
+            	if (!$lastImage) {
+            		$iSequence = 0;
+            	} else {
+            		$iSequence = $lastImage->getSequence() + 1;
+            	}
             	
             	foreach($files as $file) {
             		$oImage = new ProjectImage();
             		$oImage->setFile($file);
             		$oImage->setType('overview');
             		$oImage->setProject($entity);
+            		$oImage->setSequence($iSequence);
             		$entity->addImage($oImage);
+            		$iSequence++;
             	}
                 //$em->persist($entity);
                 //$em->flush();
@@ -182,6 +191,7 @@ class ProjectController extends Controller
                 	'notice',
                 	'Wijzigingen opgeslagen!'
                 );
+                return $this->redirect($this->generateUrl('admin_project_edit', array('id' => $id)));
             } else {
             	$this->get('session')->getFlashBag()->add(
             		'error',

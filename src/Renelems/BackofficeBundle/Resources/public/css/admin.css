@@ -217,10 +217,45 @@ select {
 	padding-left: 8px;
 }
 
+/* IMAGE LIST */
 .images {
 	width: 560px;
 }
 
+ul#sortable {
+	list-style: none;
+}
+
+ul#sortable li {
+	float:left;
+	cursor: move;
+	position: relative;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	height: 150px;
+	background-color: #EBEBEB;
+	padding: 10px;
+}
+
+ul#sortable li:hover {
+	background-color: #D5E0DD;
+}
+
+ul#sortable li a.removeImage {
+	position: absolute;
+	top: 0;
+	right: 0;
+	opacity: 1;
+	background-color: #FFF;
+	padding: 0px 2px;
+	border: 1px solid black;
+}
+
+ul#sortable li .removeImage:hover {
+	background-color: #FFF;
+	padding: 0px 2px;
+	border: 1px solid red;
+}
 
 /* BUTTONS */
 a.btn {

@@ -17,25 +17,61 @@ $(document).ready(function() {
     var newForm = prototype.replace('renelems_dbbundle_project[images][__name__][file]', 'renelems_dbbundle_project[images][__name__][file][]');
     newForm = newForm.replace(/__name__/g, index);
 
-    $(".imageList").prepend(newForm);
-	
-	// add a delete link to all of the existing tag form li elements
-	//$collectionHolder.find('table').each(function() {
-    //    addImageFormDeleteLink($(this));
-    //});
+    $("#addImage").prepend(newForm);
 });
 
-function addImageFormDeleteLink($imageFormLi) {
-    var $removeFormA = $('<a href="#" class="btn delete pull-right"><i class="fa fa-trash-o"></i> delete this image</a>');
-    $imageFormLi.append($removeFormA);
+function updateImagePosition(elem, newPosition, oldPosition) {
+	var elemClass = elem.attr('class').split("_");
+	$.ajax({
+        url: urlApiUpdateImagePosition,
+        dataType: 'json',
+        type: 'POST',
+        data:
+        {
+            object: elemClass[0],
+            id: elemClass[1],
+            oldPosition: oldPosition,
+            newPosition: newPosition,
+        },
+        beforeSend:function(d)
+        {
+        	elem.parent().css("opacity", "0.5");
+        },
+        error:function(d)
+        {
+        	elem.parent().css("opacity", "1");
+        },
+        success:function(d)
+        {
+        	elem.parent().css("opacity", "1");
+        }
+    });
+}
 
-    $removeFormA.on('click', function(e) {
-        // prevent the link from creating a "#" on the URL
-        e.preventDefault();
-
-        if(confirm("weet je zeker dat je deze afbeelding wilt verwijderen?")) {
-	        // remove the li for the tag form
-	        $imageFormLi.remove();
+function removeImage(elem) {
+	var elem = $(elem);
+	var id = elem.data('id');
+	var object = elem.data('object'); 
+	$.ajax({
+        url: urlApiRemoveImage,
+        dataType: 'json',
+        type: 'POST',
+        data:
+        {
+            object: object,
+            id: id,
+        },
+        beforeSend:function(d)
+        {
+        	elem.parent().css("opacity", "0.5");
+        },
+        error:function(d)
+        {
+        	elem.parent().css("opacity", "1");
+        },
+        success:function(d)
+        {
+        	elem.parent().remove();
         }
     });
 }
