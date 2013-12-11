@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\Security\Core\SecurityContext;
 
 use Renelems\DBBundle\Entity\Admin;
+use Renelems\BackofficeBundle\Form\LoginType;
 
 class SecurityController extends Controller
 {
@@ -20,7 +21,7 @@ class SecurityController extends Controller
     	$admin = new Admin();
         $request = $this->getRequest();
         $session = $request->getSession();
-
+        
         // get the login error if there is one
         if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
             $error = $request->attributes->get(

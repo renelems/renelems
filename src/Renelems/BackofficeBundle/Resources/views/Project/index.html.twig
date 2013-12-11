@@ -19,7 +19,7 @@
                 <td>{{entity.id}}</td>
                 <td>{{entity.title}}</td>
                 <td>{{entity.website}}</td>
-                <td class="text_center">{% if entity.active == 1%}<i class="fa fa-check"></i>{% else %}<i class="fa fa-times"></i>{% endif %}</td>
+                <td class="text_center"><a onclick="toggleActive(this)" data-id="{{ entity.id }}" data-object="Project">{% if entity.active == 1%}<i class="fa fa-check"></i>{% else %}<i class="fa fa-times"></i>{% endif %}</a></td>
                 <td class="last">
                 	<a href="{{path('admin_project_edit', {id: entity.id })}}" class="btn edit"><i class="fa fa-pencil-square"></i> Bewerken</a>
                 	<a onclick="return window.confirm('weet je zeker dat je {{ entity.title }} als project wilt verwijderen?');" href="{{path('admin_project_delete', {id: entity.id })}}" class="btn delete"><i class="fa fa-trash-o"></i> Verwijderen</a>

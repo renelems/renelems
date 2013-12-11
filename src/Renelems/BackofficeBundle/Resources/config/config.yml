@@ -1,3 +1,5 @@
 twig:
     form:
-        resources: ['form_table_layout.html.twig']
+        resources:
+            - 'form_table_layout.html.twig'
+            - 'RenelemsBackofficeBundle:Form:fields.html.twig'

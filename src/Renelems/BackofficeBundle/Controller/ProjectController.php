@@ -15,6 +15,7 @@ use Doctrine\ORM\EntityManager;
 use Renelems\DBBundle\Entity\Project;
 use Renelems\DBBundle\Entity\ProjectImage;
 use Renelems\BackofficeBundle\Form\ProjectType;
+use Renelems\DBBundle\Entity\Tag;
 
 /**
  * Admin controller.
@@ -51,7 +52,7 @@ class ProjectController extends Controller
     public function newAction()
     {
         $entity = new Project();
-        $form   = $this->createForm(new ProjectType($this->get('security.context')), $entity);
+        $form   = $this->createForm(new ProjectType($entity), $entity);
 
         return array(
             'entity' => $entity,
@@ -74,7 +75,7 @@ class ProjectController extends Controller
         $oLoggableListener->setUsername($this->get('security.context')->getToken()->getUsername());
         $entity  = new Project();
         $request = $this->getRequest();
-        $form    = $this->createForm(new ProjectType($this->get('security.context')), $entity);
+        $form    = $this->createForm(new ProjectType($entity), $entity);
         $form->bind($request);
 
         if ($form->isValid()) {
@@ -114,8 +115,8 @@ class ProjectController extends Controller
                 throw $this->createNotFoundException('Unable to find Project entity.');
             }
 			
-            $editForm = $this->createForm(new ProjectType($this->get('security.context')), $entity);
-			
+            $editForm = $this->createForm(new ProjectType($entity), $entity);
+			$editForm->get('tags')->setData('');
             return array(
                 'entity'      => $entity,
                 'edit_form'   => $editForm->createView(),
@@ -151,14 +152,15 @@ class ProjectController extends Controller
 
         if(($this->get('security.context')->isGranted('ROLE_ADMIN') && $id != $entity->getId()) || $id == $entity->getId()) {
 
-            $editForm   = $this->createForm(new ProjectType($this->get('security.context')), $entity);
+            $editForm   = $this->createForm(new ProjectType($entity), $entity);
 
             $request = $this->getRequest();
 			
             foreach($request->files->get('renelems_dbbundle_project') as $files) {
             	$files = $files[0]['file'];
             }
-            $request->files->set('renelems_dbbundle_project', array('images' => array(NULL)));
+            $request->files->set('renelems_dbbundle_project', array('images' => NULL));
+            
             $editForm->bind($request);
             
             if ($editForm->isValid()) {
@@ -171,6 +173,8 @@ class ProjectController extends Controller
             	}
             	
             	foreach($files as $file) {
+            		if($file == NULL)
+            			continue;
             		$oImage = new ProjectImage();
             		$oImage->setFile($file);
             		$oImage->setType('overview');
@@ -179,11 +183,17 @@ class ProjectController extends Controller
             		$entity->addImage($oImage);
             		$iSequence++;
             	}
-                //$em->persist($entity);
-                //$em->flush();
                 
-                //$images = $entity->getImages();
-                
+            	if($request->request->get('autocomplete_ids')) {
+	                $aTagIds = explode(",", $request->request->get('autocomplete_ids'));
+	                
+	                foreach ($aTagIds as $iTagId) {
+	                	if($iTagId == NULL)
+	                		continue;
+	                	$oTag = $em->getRepository('RenelemsDBBundle:Tag')->find($iTagId);
+	                	$entity->addTag($oTag);
+	                }
+            	}
                 $em->persist($entity);
                 $em->flush();
                 

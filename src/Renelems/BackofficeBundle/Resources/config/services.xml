@@ -11,6 +11,9 @@
             <argument type="service" id="doctrine" />
             <argument type="service" id="security.encoder_factory" />
         </service>
-
+        
+        <service id="renelems.form.type.autocomplete" class="Renelems\BackofficeBundle\Form\Type\AutoCompleteType">
+            <tag name="form.type" alias="autocomplete" />
+        </service>
     </services>
 </container>

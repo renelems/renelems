@@ -1,13 +1,33 @@
-{% if error %}
-    <div>{{ error.message }}</div>
-{% endif %}
+{% extends '::base.html.twig' %}
 
-<form action="{{ path('admin_login_check') }}" method="post">
-    <label for="username">E-mailadres:</label>
-    <input type="text" id="username" name="_username" value="{{ last_username }}" />
+{% block title %}Admin{% endblock %}
+{% block stylesheets %}
+	{{ parent() }}
+	<link href="/bundles/renelemsbackoffice/css/admin.css" rel="stylesheet" />
+	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="_password" />
+{% endblock %}
 
-    <button type="submit">login</button>
-</form>
+{% block body %}
+<div id="login">
+	<h1>Login</h1>
+	{% if error %}
+	    <div class="flash_error">{{ error.message }}</div>
+	{% endif %}
+	
+	<form action="{{ path('admin_login_check') }}" method="post">
+		<table>
+			<tr>
+				<td><label for="username">E-mailadres</label></td>
+				<td><input type="text" id="username" name="_username" value="{{ last_username }}" /></td>
+			</tr>
+			<tr>
+				<td><label for="password">Wachtwoord</label></td>
+				<td><input type="password" id="password" name="_password" /></td>
+			</tr>
+		</table>
+	
+	    <button type="submit" class="btn add"><i class="fa fa-unlock-alt"></i> login</button>
+	</form>
+</div>
+{% endblock %}

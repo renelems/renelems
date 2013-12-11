@@ -4,6 +4,7 @@ namespace Renelems\DBBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Project
@@ -80,10 +81,13 @@ class Project
     private $updated;
 
     /**
-     * @var string
+     * @var ArrayCollection Tag
      *
-     * @Gedmo\Translatable
-     * @ORM\Column(name="tags", type="string", length=255)
+     * @ORM\ManyToMany(targetEntity="Tag")
+     * @ORM\JoinTable(name="project_has_tag",
+     *      joinColumns={@ORM\JoinColumn(name="tag_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="project_id", referencedColumnName="id")}
+     * )
      */
     private $tags;
     
@@ -111,6 +115,7 @@ class Project
     public function __construct()
     {
     	$this->images = new \Doctrine\Common\Collections\ArrayCollection();
+    	$this->tags = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
     /**
@@ -394,5 +399,28 @@ class Project
     public function getLogo()
     {
     	return $this->images;
+    }
+
+    /**
+     * Add tags
+     *
+     * @param \Renelems\DBBundle\Entity\Tag $tags
+     * @return Project
+     */
+    public function addTag(\Renelems\DBBundle\Entity\Tag $tags)
+    {
+        $this->tags[] = $tags;
+    
+        return $this;
+    }
+
+    /**
+     * Remove tags
+     *
+     * @param \Renelems\DBBundle\Entity\Tag $tags
+     */
+    public function removeTag(\Renelems\DBBundle\Entity\Tag $tags)
+    {
+        $this->tags->removeElement($tags);
     }
 }

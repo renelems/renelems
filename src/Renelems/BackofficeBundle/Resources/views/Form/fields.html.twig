@@ -1,0 +1,14 @@
+{# Renelems/BackofficeBundle/Resources/views/Form/fields.html.twig #}
+{% block autocomplete_widget %}
+    {% spaceless %}
+		{{ block('form_widget') }}
+		<img src="/bundles/renelemsbackoffice/images/ajax-loader.gif" id="autocomplete_loader" />
+		<a onclick="" class="btn add add_tag_button"><i class="fa fa-plus-square"></i> Aanmaken</a>
+        <ul id="autocomplete_list">
+        	{% for tag in form.parent.vars.value.tags %}
+        		<li data-tag-id="{{ tag.id }}"><i class="fa fa-tag"></i>{{ tag.title }} <i class="fa fa-times delete_tag" alt="Verwijder" ></i></li>
+        	{% endfor %}
+        </ul>
+        <input type="hidden" name="autocomplete_ids" id="autocomplete_ids" />
+    {% endspaceless %}
+{% endblock %}

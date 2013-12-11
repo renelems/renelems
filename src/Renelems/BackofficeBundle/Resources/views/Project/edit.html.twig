@@ -3,6 +3,7 @@
 {% block javascripts %}
 	{{ parent() }}
 	<script src="//code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+	<script type="text/javascript" src="/bundles/renelemsbackoffice/ckeditor/ckeditor.js"></script>
 	<script type="text/javascript">
 	$(function() {
 		var oldPosition = null;
@@ -16,8 +17,16 @@
 			}
 		});
 		$( "#sortable" ).disableSelection();
+
+		init_autocomplete();
+		init_autocomplete_actions('tag');
 	});
 	</script>
+{% endblock %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	<link href="//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet" />
 {% endblock %}
 
 {% block content %}
@@ -31,7 +40,7 @@
 
 <form action="{{ path('admin_project_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }} id="edit_form">
 	{% do edit_form.images.setRendered %}
-	<div class="pull-right">
+	<div class="pull-right imagesHolder">
 	    <div class="images" data-prototype="{{ form_widget(edit_form.images.vars.prototype)|e }}">
 		    <h3>Afbeeldingen</h3>
 		    <div id="addImage"></div>
@@ -47,7 +56,7 @@
     </div>
 	<div class="pull-left">
 	    {{ form_widget(edit_form)}}
-	    <button type="submit" class="pull-left clear"><i class="fa fa-floppy-o"></i> Bijwerken</button>
+	    <button type="submit" class="pull-right clear"><i class="fa fa-floppy-o"></i> Bijwerken</button>
 	    <div class="record_actions clear">
 		    <a href="{{ path('admin_project') }}">&laquo; Terug naar de lijst</a>
 		</div>

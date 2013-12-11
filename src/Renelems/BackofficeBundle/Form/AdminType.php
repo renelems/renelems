@@ -34,7 +34,14 @@ class AdminType extends AbstractType
 		        	'message' => 'Ongeldig e-mailadres',
 		            'checkMX' => true
 	        )))))
-            ->add('newpassword', 'password', array( 'label' => 'Wachtwoord', 'required' => true, 'constraints' => array(new Assert\NotBlank(array('message' => 'Verplicht veld')))))
+            ->add('newpassword', 'repeated', array(
+            		'type' => 'password',
+            		'required' => true,
+            		'invalid_message' => 'De wachtwoord velden komen niet overeen',
+            		'constraints' => array(new Assert\NotBlank(array('message' => 'Verplicht veld'))),
+            		'first_options'  => array('label' => 'Wachtwoord'),
+            		'second_options' => array('label' => 'Wachtwoord herhalen'),
+            ))
             ->add('active', null, array('label' => 'Actief', 'required' => false))
             ->add('roles', 'choice', array('label' => 'Rechten', 'choices' => Admin::$aRoles, 'multiple' => true, 'expanded' => true));
         
