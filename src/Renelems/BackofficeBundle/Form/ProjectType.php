@@ -32,7 +32,7 @@ class ProjectType extends AbstractType
             ->add('tags', 'autocomplete', array('label'=>'Labels', 'required' => false, 'attr' => array('class' => 'tag_autocomplete', 'placeholder' => 'Begin met typen...')))
             ->add('active', null, array('label' => 'Actief', 'required' => false))
             ->add('images', 'collection', array('type' => new ProjectImageType(), 'mapped' => false, 'allow_add' => true))
-            //->add('logo', 'file', array('label'=>'Logo', 'required' => true, 'data_class' => null, 'constraints' => array(new Assert\File(array('maxSize' => '6000000', 'mimeTypes' => array('image/jpeg', 'image/png'))))))
+            ->add('logo', 'file', array('label'=>'Logo', 'required' => false, 'data_class' => null, 'constraints' => array(new Assert\File(array('maxSize' => '6000000', 'mimeTypes' => array('image/jpeg', 'image/png'))))))
         	;
         
         

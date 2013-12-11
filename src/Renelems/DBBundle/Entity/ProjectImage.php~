@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 /**
  * @Gedmo\Loggable()
  * @ORM\Table(name="project_image")
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="Renelems\DBBundle\Entity\Repository\ProjectImageRepository")
  * @ORM\HasLifecycleCallbacks()
  */
 class ProjectImage
@@ -23,7 +23,7 @@ class ProjectImage
     /**
      * @ORM\Column(name="type", type="string", length=255, columnDefinition="enum('main', 'overview')")
      */
-    public $type;
+    public $type = 'main';
 	
     /**
      * @ORM\Column(name="path", type="string", length=255, nullable=true)
@@ -39,7 +39,7 @@ class ProjectImage
      */
     private $locale;
     
-    private $file = array();
+    private $file;
     
     /**
      * @var \DateTime
@@ -328,5 +328,28 @@ class ProjectImage
     public function getUpdated()
     {
         return $this->updated;
+    }
+
+    /**
+     * Set sequence
+     *
+     * @param integer $sequence
+     * @return ProjectImage
+     */
+    public function setSequence($sequence)
+    {
+        $this->sequence = $sequence;
+    
+        return $this;
+    }
+
+    /**
+     * Get sequence
+     *
+     * @return integer 
+     */
+    public function getSequence()
+    {
+        return $this->sequence;
     }
 }

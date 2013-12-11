@@ -11,7 +11,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  *
  * @Gedmo\Loggable()
  * @ORM\Table(name="project")
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="Renelems\DBBundle\Entity\Repository\ProjectRepository")
  * @ORM\HasLifecycleCallbacks()
  */
 class Project
@@ -111,6 +111,10 @@ class Project
      */
     private $images;
     
+    /**
+     * @ORM\OneToMany(targetEntity="ProjectImage", mappedBy="project", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    private $logo;
 
     public function __construct()
     {
@@ -365,7 +369,13 @@ class Project
      */
     public function getImages()
     {
-        return $this->images;
+    	$aReturn = array();
+        foreach($this->images as $image) {
+        	
+        	if($image->getType() == 'overview')
+        		$aReturn[] = $image;
+        }
+        return $aReturn;
     }
     
     /**
@@ -398,7 +408,12 @@ class Project
      */
     public function getLogo()
     {
-    	return $this->images;
+    	$aReturn = array();
+    	foreach ($this->images as $image) {
+    		if($image->getType() == 'main')
+    			$aReturn[] = $image;
+    	}
+    	return $aReturn;
     }
 
     /**
@@ -422,5 +437,18 @@ class Project
     public function removeTag(\Renelems\DBBundle\Entity\Tag $tags)
     {
         $this->tags->removeElement($tags);
+    }
+
+    /**
+     * Set logo
+     *
+     * @param string $logo
+     * @return Project
+     */
+    public function setLogo($logo)
+    {
+        $this->logo = $logo;
+    
+        return $this;
     }
 }

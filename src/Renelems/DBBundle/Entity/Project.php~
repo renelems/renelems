@@ -111,6 +111,10 @@ class Project
      */
     private $images;
     
+    /**
+     * @ORM\OneToMany(targetEntity="ProjectImage", mappedBy="project", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    private $logo;
 
     public function __construct()
     {
@@ -422,5 +426,18 @@ class Project
     public function removeTag(\Renelems\DBBundle\Entity\Tag $tags)
     {
         $this->tags->removeElement($tags);
+    }
+
+    /**
+     * Set logo
+     *
+     * @param string $logo
+     * @return Project
+     */
+    public function setLogo($logo)
+    {
+        $this->logo = $logo;
+    
+        return $this;
     }
 }

@@ -151,15 +151,14 @@ class ProjectController extends Controller
         }
 
         if(($this->get('security.context')->isGranted('ROLE_ADMIN') && $id != $entity->getId()) || $id == $entity->getId()) {
-
             $editForm   = $this->createForm(new ProjectType($entity), $entity);
-
             $request = $this->getRequest();
-			
-            foreach($request->files->get('renelems_dbbundle_project') as $files) {
-            	$files = $files[0]['file'];
+            
+            foreach($request->files->get('renelems_dbbundle_project')['images'] as $files) {
+            	$files = $files['file'];
             }
-            $request->files->set('renelems_dbbundle_project', array('images' => NULL));
+            $logo = $request->files->get('renelems_dbbundle_project')['logo'];
+            $request->files->set('renelems_dbbundle_project', array('images' => NULL, 'logo' => NULL));
             
             $editForm->bind($request);
             
@@ -182,6 +181,19 @@ class ProjectController extends Controller
             		$oImage->setSequence($iSequence);
             		$entity->addImage($oImage);
             		$iSequence++;
+            	}
+            	if($logo != NULL) {
+            		$oldLogo = $em->getRepository('RenelemsDBBundle:ProjectImage')->findOneBy(array("project" => $entity, "type" => 'main'));
+            		if($oldLogo !== NULL) {
+            			unlink($this->container->getParameter('project_image_dir').$oldLogo->getPath());
+            			unlink($this->container->getParameter('project_image_dir')."thumb_".$this->container->getParameter('thumbnail_width')."/".$oldLogo->getPath());
+            			$em->remove($oldLogo);
+            			$em->flush();
+            		}
+            		$oImage = new ProjectImage();
+            		$oImage->setFile($logo);
+            		$oImage->setProject($entity);
+            		$entity->addImage($oImage);
             	}
                 
             	if($request->request->get('autocomplete_ids')) {

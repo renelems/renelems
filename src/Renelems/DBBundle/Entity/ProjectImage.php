@@ -23,7 +23,7 @@ class ProjectImage
     /**
      * @ORM\Column(name="type", type="string", length=255, columnDefinition="enum('main', 'overview')")
      */
-    public $type;
+    public $type = 'main';
 	
     /**
      * @ORM\Column(name="path", type="string", length=255, nullable=true)
