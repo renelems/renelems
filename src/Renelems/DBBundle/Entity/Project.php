@@ -85,8 +85,8 @@ class Project
      *
      * @ORM\ManyToMany(targetEntity="Tag")
      * @ORM\JoinTable(name="project_has_tag",
-     *      joinColumns={@ORM\JoinColumn(name="tag_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="project_id", referencedColumnName="id")}
+     *      joinColumns={@ORM\JoinColumn(name="project_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="tag_id", referencedColumnName="id")}
      * )
      */
     private $tags;

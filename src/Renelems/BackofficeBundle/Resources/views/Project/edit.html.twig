@@ -34,7 +34,7 @@
     <a href="{{ path('admin_project') }}">&laquo; Terug naar de lijst</a>
 </div>
 
-<h2>Project bewerken</h2>
+<h2>Project "{{ entity.title }}" bewerken</h2>
 
 {% include "RenelemsBackofficeBundle:Partials:notice.html.twig" %}
 
@@ -56,22 +56,14 @@
     </div>
 	<div class="pull-left">
 		<table id="renelems_dbbundle_project">
-			<tbody>
-				<tr>
-					<td>{{ form_label(edit_form.logo) }}</td>
-					<td>
-						{{ form_widget(edit_form.logo) }}
-						{% if entity.logo|first %}
-						<div>
-							<img src="/{{ project_image_dir }}/thumb_{{ thumbnail_width }}/{{ entity.logo|first.path }}" />
-							<a onclick="if(confirm('Weet je zeker dat je deze afbeelding wilt verwijderen?')) removeImage(this)" class="removeImage" data-id="{{ entity.logo|first.id }}" data-object="ProjectImage"><i class="fa fa-times"></i></a>
-						</div>
-						{% endif %}
-					</td>
-				</tr>
-	    		{{ form_widget(edit_form)}}
-	    	</tbody>
+    		{{ form_widget(edit_form)}}
 	    </table>
+	    {% if entity.logo|first %}
+		<div>
+			<img src="/{{ project_image_dir }}/thumb_{{ thumbnail_width }}/{{ entity.logo|first.path }}" />
+			<a onclick="if(confirm('Weet je zeker dat je deze afbeelding wilt verwijderen?')) removeImage(this)" class="removeImage" data-id="{{ entity.logo|first.id }}" data-object="ProjectImage"><i class="fa fa-times"></i></a>
+		</div>
+		{% endif %}
 	    <button type="submit" class="pull-right clear"><i class="fa fa-floppy-o"></i> Bijwerken</button>
 	    <div class="record_actions clear">
 		    <a href="{{ path('admin_project') }}">&laquo; Terug naar de lijst</a>

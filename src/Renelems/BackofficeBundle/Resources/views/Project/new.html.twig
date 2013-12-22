@@ -1,8 +1,25 @@
 {% extends 'RenelemsBackofficeBundle::layout.html.twig' %}
 
+{% block javascripts %}
+	{{ parent() }}
+	<script src="//code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+	<script type="text/javascript" src="/bundles/renelemsbackoffice/ckeditor/ckeditor.js"></script>
+	<script type="text/javascript">
+	$(function() {
+		init_autocomplete();
+		init_autocomplete_actions('tag');
+	});
+	</script>
+{% endblock %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	<link href="//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet" />
+{% endblock %}
+
 {% block content %}
 <div class="record_actions">
-	<a href="{{ path('admin_project') }}">&laquo; Terug naar de lijst</a>
+    <a href="{{ path('admin_project') }}">&laquo; Terug naar de lijst</a>
 </div>
 
 <h2>Project aanmaken</h2>
@@ -11,21 +28,29 @@
 
 <form action="{{ path('admin_project_create') }}" method="post" {{ form_enctype(form) }} id="new_form">
 	{% do form.images.setRendered %}
-    <div class="pull-left">
-	    {{ form_widget(form)}}
-    </div>
-    <div class="pull-right imagesHolder">
+	<div class="pull-right imagesHolder">
 	    <div class="images" data-prototype="{{ form_widget(form.images.vars.prototype)|e }}">
 		    <h3>Afbeeldingen</h3>
-	        {% for image in form.images %}
-	            {{ form_widget(image) }}
+		    <div id="addImage"></div>
+		    <ul class="imageList" id="sortable">
+	        {% for image in entity.images %}
+	        	<li class="ProjectImage_{{ image.id }}">
+	            	<img src="/{{ project_image_dir }}/thumb_{{ thumbnail_width }}/{{ image.path }}" />
+	            	<a onclick="if(confirm('Weet je zeker dat je deze afbeelding wilt verwijderen?')) removeImage(this)" class="removeImage" data-id="{{ image.id }}" data-object="ProjectImage"><i class="fa fa-times"></i></a>
+	            </li>
 	        {% endfor %}
+	        </ul>
 	    </div>
     </div>
-    <button type="submit" class="pull-left clear"><i class="fa fa-floppy-o"></i> Aanmaken</button>
+	<div class="pull-left">
+		<table id="renelems_dbbundle_project">
+    		{{ form_widget(form)}}
+	    </table>
+	    <button type="submit" class="pull-right clear"><i class="fa fa-floppy-o"></i> Bijwerken</button>
+	    <div class="record_actions clear">
+		    <a href="{{ path('admin_project') }}">&laquo; Terug naar de lijst</a>
+		</div>
+    </div>
 </form>
 
-<div class="record_actions clear">
-    <a href="{{ path('admin_project') }}">&laquo; Terug naar de lijst</a>
-</div>
 {% endblock %}

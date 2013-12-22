@@ -76,19 +76,56 @@ class ProjectController extends Controller
         $entity  = new Project();
         $request = $this->getRequest();
         $form    = $this->createForm(new ProjectType($entity), $entity);
+		
+        foreach($request->files->get('renelems_dbbundle_project')['images'] as $files) {
+        	$files = $files['file'];
+        }
+        $logo = $request->files->get('renelems_dbbundle_project')['logo'];
+        $request->files->set('renelems_dbbundle_project', array('images' => NULL, 'logo' => NULL));
+        
         $form->bind($request);
-
+        
         if ($form->isValid()) {
+        	$iSequence=0;
+        	foreach($files as $file) {
+        		if($file == NULL)
+        			continue;
+        		$oImage = new ProjectImage();
+        		$oImage->setFile($file);
+        		$oImage->setType('overview');
+        		$oImage->setProject($entity);
+        		$oImage->setSequence($iSequence);
+        		$entity->addImage($oImage);
+        		$iSequence++;
+        	}
+        	if($logo != NULL) {
+        		$oImage = new ProjectImage();
+        		$oImage->setFile($logo);
+        		$oImage->setProject($entity);
+        		$entity->addImage($oImage);
+        	}
+        	
+        	if($request->request->get('autocomplete_ids')) {
+        		$aTagIds = explode(",", $request->request->get('autocomplete_ids'));
+        		 
+        		foreach ($aTagIds as $iTagId) {
+        			if($iTagId == NULL)
+        				continue;
+        			$oTag = $em->getRepository('RenelemsDBBundle:Tag')->find($iTagId);
+        			$entity->addTag($oTag);
+        		}
+        	}
+        	
             $em->persist($entity);
             $em->flush();
-            
+            return $this->redirect($this->generateUrl('admin_project_edit', array('id' => $entity->getId())));
         } else {
            	$this->get('session')->getFlashBag()->add(
         		'error',
          		'Opslaan mislukt!'
            	);
         }
-
+		
         return array(
             'entity' => $entity,
             'form'   => $form->createView()
@@ -213,7 +250,7 @@ class ProjectController extends Controller
                 	'notice',
                 	'Wijzigingen opgeslagen!'
                 );
-                return $this->redirect($this->generateUrl('admin_project_edit', array('id' => $id)));
+                
             } else {
             	$this->get('session')->getFlashBag()->add(
             		'error',
@@ -221,15 +258,12 @@ class ProjectController extends Controller
             	);
             }
 
-            return array(
-                'entity'      => $entity,
-                'edit_form'   => $editForm->createView(),
-            );
         }
         else
         {
             throw new AccessDeniedException();
         }
+        return $this->redirect($this->generateUrl('admin_project_edit', array('id' => $id)));
     }
 
     /**

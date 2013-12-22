@@ -175,6 +175,10 @@ a:hover {
 
 
 /* TABLES */
+table.chart {
+	margin-bottom: 10px;
+}
+
 table tr.odd {
 	background-color: #EBEBEB;
 }
