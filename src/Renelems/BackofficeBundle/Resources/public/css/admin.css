@@ -289,6 +289,8 @@ select {
 .images {
 }
 
+
+
 ul#sortable {
 	list-style: none;
 }
@@ -299,13 +301,19 @@ ul#sortable li {
 	position: relative;
 	margin-right: 10px;
 	margin-bottom: 10px;
-	height: 150px;
+	height: 180px;
 	background-color: #EBEBEB;
 	padding: 10px;
 }
 
 ul#sortable li:hover {
 	background-color: #D5E0DD;
+}
+
+ul#sortable li input.projectImageTitle {
+	width: 183px;
+	position: absolute;
+	bottom: 7px;
 }
 
 ul#sortable li a.removeImage {

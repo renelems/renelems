@@ -190,7 +190,6 @@ class ProjectController extends Controller
         if(($this->get('security.context')->isGranted('ROLE_ADMIN') && $id != $entity->getId()) || $id == $entity->getId()) {
             $editForm   = $this->createForm(new ProjectType($entity), $entity);
             $request = $this->getRequest();
-            
             foreach($request->files->get('renelems_dbbundle_project')['images'] as $files) {
             	$files = $files['file'];
             }
@@ -200,6 +199,15 @@ class ProjectController extends Controller
             $editForm->bind($request);
             
             if ($editForm->isValid()) {
+            	$aImages = $entity->getImages();
+            	foreach($aImages as $oImage) {
+            		if($request->request->get('title_'.$oImage->getId()) == $oImage->getTitle())
+            			continue;
+            		
+            		$oImage->setTitle($request->request->get('title_'.$oImage->getId()));
+            		$em->persist($oImage);
+            	}
+            	
             	$lastImage = $em->getRepository('RenelemsDBBundle:ProjectImage')->findOneBy(array("project" => $entity), array("sequence" => "DESC"));
             	
             	if (!$lastImage) {
@@ -243,6 +251,9 @@ class ProjectController extends Controller
 	                	$entity->addTag($oTag);
 	                }
             	}
+            	
+            	
+            	
                 $em->persist($entity);
                 $em->flush();
                 

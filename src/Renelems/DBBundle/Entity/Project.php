@@ -451,4 +451,9 @@ class Project
     
         return $this;
     }
+    
+    public function setTranslatableLocale($locale)
+    {
+    	$this->locale = $locale;
+    }
 }

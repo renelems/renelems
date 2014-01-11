@@ -26,6 +26,11 @@ class ProjectImage
     public $type = 'main';
 	
     /**
+     * @ORM\Column(name="title", type="string", length=255, nullable=true)
+     */
+    public $title;
+    
+    /**
      * @ORM\Column(name="path", type="string", length=255, nullable=true)
      */
     public $path;
@@ -351,5 +356,33 @@ class ProjectImage
     public function getSequence()
     {
         return $this->sequence;
+    }
+    
+    public function setTranslatableLocale($locale)
+    {
+    	$this->locale = $locale;
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     * @return ProjectImage
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string 
+     */
+    public function getTitle()
+    {
+        return $this->title;
     }
 }

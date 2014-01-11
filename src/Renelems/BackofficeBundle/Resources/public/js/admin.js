@@ -56,6 +56,9 @@ function init_autocomplete() {
                     alert("Label is al gekoppeld!");
                 }
             }
+			setTimeout(function (){
+				$( ".tag_autocomplete" ).val('');
+			}, 100);
 		},
 		close: function( event, ui ) {
 			if($(this).val() == '')

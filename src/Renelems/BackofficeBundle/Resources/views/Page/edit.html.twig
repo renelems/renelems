@@ -1,0 +1,36 @@
+{% extends 'RenelemsBackofficeBundle::layout.html.twig' %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script src="//code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+	<script type="text/javascript" src="/bundles/renelemsbackoffice/ckeditor/ckeditor.js"></script>
+{% endblock %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	<link href="//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+<div class="record_actions">
+    <a href="{{ path('admin_page') }}">&laquo; Terug naar de lijst</a>
+</div>
+
+<h2>Pagina "{{ entity.title }}" bewerken</h2>
+
+{% include "RenelemsBackofficeBundle:Partials:notice.html.twig" %}
+
+<form action="{{ path('admin_page_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }} id="edit_form">
+	<div class="pull-left">
+		<table id="renelems_dbbundle_page">
+    		{{ form_widget(edit_form)}}
+	    </table>
+	    <button type="submit" class="pull-right clear"><i class="fa fa-floppy-o"></i> Bijwerken</button>
+	    
+    </div>
+</form>
+<div class="record_actions clear">
+	<a href="{{ path('admin_page') }}">&laquo; Terug naar de lijst</a>
+</div>
+
+{% endblock %}

@@ -47,8 +47,10 @@
 		    <ul class="imageList" id="sortable">
 	        {% for image in entity.images %}
 	        	<li class="ProjectImage_{{ image.id }}">
-	            	<img src="/{{ project_image_dir }}/thumb_{{ thumbnail_width }}/{{ image.path }}" />
+	            	<img src="/{{ project_image_dir }}/thumb_{{ thumbnail_width }}/{{ image.path }}" /><br/>
+	            	<input type="text" name="title_{{ image.id }}" class="projectImageTitle" value="{{ image.title }}" />
 	            	<a onclick="if(confirm('Weet je zeker dat je deze afbeelding wilt verwijderen?')) removeImage(this)" class="removeImage" data-id="{{ image.id }}" data-object="ProjectImage"><i class="fa fa-times"></i></a>
+	            	
 	            </li>
 	        {% endfor %}
 	        </ul>
