@@ -33,7 +33,7 @@
 		</div>
 		{% endblock %}
 	</div>
-	<div id="content_wrapper">
+	<div id="content-wrapper">
     	<div class="content">
 			{% block content %}
 			{% endblock %}
@@ -44,7 +44,30 @@
 </div>
 <div id="footer">
 	<div class="container">
+		<p class="pull-left contact-me">Contact me at: <a href="mailto:info@renelems.nl" class="underline"><strong>info@renelems.nl</strong></a></p>
+		<ul class="pull-right" id="footer-menu">
+			<li><a href="{{ path('renelems_home') }}" class="home {% if menu == 'home' %}active{% endif %}">Home</a></li>
+			<li><a href="" class="service {% if menu == 'service' %}active{% endif %}">Diensten</a></li>
+			<li><a href="" class="project {% if menu == 'project' %}active{% endif %}">Projecten</a></li>
+			<li><a href="" class="contact {% if menu == 'contact' %}active{% endif %}">Contact</a></li>
+		</ul>
 	</div>
+</div>
+<div id="left-menu">
+	<ul>
+		<li><a href="" class="service {% if menu == 'service' %}active{% endif %}">
+			<img src="{{ asset('/bundles/renelemswebsite/images/icons/services-left.png') }}" class="non-hover" />
+			<img src="{{ asset('/bundles/renelemswebsite/images/icons/services-small.png') }}" class="hover" />
+		</a></li>
+		<li><a href="" class="project {% if menu == 'project' %}active{% endif %}">
+			<img src="{{ asset('/bundles/renelemswebsite/images/icons/projects-left.png') }}" class="non-hover" />
+			<img src="{{ asset('/bundles/renelemswebsite/images/icons/projects-small.png') }}" class="hover" />
+		</a></li>
+		<li><a href="" class="contact {% if menu == 'contact' %}active{% endif %}">
+			<img src="{{ asset('/bundles/renelemswebsite/images/icons/contact-left.png') }}" class="non-hover" />
+			<img src="{{ asset('/bundles/renelemswebsite/images/icons/contact-small.png') }}" class="hover" />
+		</a></li>
+	</ul>
 </div>
 <script type="text/javascript">
 {% block javascripts_footer %}
@@ -55,6 +78,8 @@
 		}, function() {
 			$(this).css('color', '');
 		});
+		var random_color = colors[Math.floor(Math.random() * colors.length)];
+		$('#footer-menu li a.home.active').css('color', random_color);
 {% endblock %}
 </script>
 {% endblock %}

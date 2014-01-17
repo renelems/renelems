@@ -41,6 +41,12 @@ class Page
     private $locale;
     
     /**
+     * @Gedmo\Translatable
+     * @ORM\Column(name="introduction", type="text")
+     */
+    public $introduction;
+    
+    /**
      * @var string
      *
      * @Gedmo\Translatable
@@ -63,6 +69,13 @@ class Page
      * @ORM\Column(name="updated", type="datetime")
      */
     private $updated;
+    
+    /**
+     * @var boolean $isOnHomepage
+     *
+     * @ORM\Column(name="is_on_homepage", type="boolean", nullable=false)
+     */
+    protected $isOnHomepage;
     
     /**
      * @var boolean $active
@@ -222,5 +235,51 @@ class Page
     public function getActive()
     {
         return $this->active;
+    }
+
+    /**
+     * Set introduction
+     *
+     * @param string $introduction
+     * @return Page
+     */
+    public function setIntroduction($introduction)
+    {
+        $this->introduction = $introduction;
+    
+        return $this;
+    }
+
+    /**
+     * Get introduction
+     *
+     * @return string 
+     */
+    public function getIntroduction()
+    {
+        return $this->introduction;
+    }
+
+    /**
+     * Set isOnHomepage
+     *
+     * @param boolean $isOnHomepage
+     * @return Page
+     */
+    public function setIsOnHomepage($isOnHomepage)
+    {
+        $this->isOnHomepage = $isOnHomepage;
+    
+        return $this;
+    }
+
+    /**
+     * Get isOnHomepage
+     *
+     * @return boolean 
+     */
+    public function getIsOnHomepage()
+    {
+        return $this->isOnHomepage;
     }
 }
