@@ -1,0 +1,29 @@
+{% extends 'RenelemsWebsiteBundle::layout.html.twig' %}
+
+{% block content %}
+	<section>
+		<h1 class="yellow">{{ oContactPage.title }}</h2>
+		<ol class="breadcrumb">
+		  <li><a href="{{ path('renelems_home') }}"><i class="fa fa-home"></i></a></li>
+		  <li class="active">{{ oContactPage.title }}</li>
+		</ol>
+		<div class="row">
+			<div class="col-md-9">
+				{% include 'RenelemsWebsiteBundle:Partials:flash.html.twig' %}
+				<form action="{{ path('renelems_contact') }}" method="post" id="new_form">
+					<div class="pull-left">
+						<table id="renelems_contact">
+				    		{{ form_widget(oForm)}}
+					    </table>
+					    <button type="submit" class="btn yellow pull-right clearfix">Send</button>
+				    </div>
+				</form>
+			</div>
+			<div class="col-md-3" id="contact-sidebar">
+				<h3>Renelems.nl</h3>
+				<p>info@renelems.nl<br/>
+				06-24721262</p>
+			</div>
+		</div>
+	</section>
+{% endblock %}

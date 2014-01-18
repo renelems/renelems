@@ -20,11 +20,17 @@ body {
          url('/bundles/renelemswebsite/fonts/oratorstd.svg#OratorStdMedium') format('svg');
 }
 
-h1 {
+h1.logo {
 	font-family: 'OratorStd';
 	font-size: 30px;
 	font-weight: normal;
 	text-transform: uppercase;
+}
+
+h1 {
+	font-family: 'OratorStd';
+	font-size: 36px;
+	font-weight: normal;
 }
 
 h1 a {
@@ -35,7 +41,13 @@ h2 {
 	font-family: 'OratorStd';
 	font-size: 28px;
 	font-weight: normal;
-	margin-bottom: 10px;
+}
+
+h3 {
+	font-family: 'OratorStd';
+	font-size: 20px;
+	font-weight: normal;
+	text-transform: uppercase;
 }
 
 a,
@@ -43,7 +55,8 @@ a:hover {
 	text-decoration: none;
 }
 
-a.btn {
+a.btn,
+button.btn {
 	background-color: #FFFFFF;
 	border: none;
 	border-radius: 0;
@@ -57,7 +70,8 @@ a.btn:after {
 	content: "\00a0>";
 }
 
-a.btn:hover {
+a.btn:hover,
+button.btn:hover {
 	color: #353230;
 }
 
@@ -96,6 +110,14 @@ p {
 
 section {
 	margin-bottom: 55px;	
+}
+
+.row {
+	padding-bottom: 30px;
+}
+
+.flash-notice {
+	margin-bottom: 10px;
 }
 
 /* MENU */
@@ -161,7 +183,6 @@ section {
 
 #left-menu ul li {
 	margin-bottom: 5px;
-	width: 70px;
 	height: 70px;
 }
 
@@ -177,6 +198,10 @@ section {
 	vertical-align: middle;
 }
 
+#left-menu ul li a.active {
+	width: 75px;
+}
+
 #left-menu ul li a img {
 	width: 45px;
 	margin: auto;
@@ -188,13 +213,15 @@ section {
 	display:none;
 }
 
-#left-menu ul li a:hover img.hover {
+#left-menu ul li a:hover img.hover,
+#left-menu ul li a.active img.hover {
 	display:table;
 	opacity: 0.55;
 	filter: alpha(opacity=55);
 }
 
-#left-menu ul li a:hover img.non-hover {
+#left-menu ul li a:hover img.non-hover,
+#left-menu ul li a.active img.non-hover {
 	display:none;
 }
 
@@ -211,10 +238,124 @@ section {
 	background-color: #dcb84c;
 }
 
+/* BREADCRUMBS */
+
+.breadcrumb {
+	background-color: transparent;
+	padding: 5px 0px 0px 0px;
+	font-size: 12px;
+}
+
+.breadcrumb>.active {
+	color: #FFFFFF;
+}
+
+.breadcrumb>li a {
+	color: #C0C0C0;
+}
+
+.breadcrumb>li a:hover {
+	color: #FFFFFF;
+}
+
+.breadcrumb>li+li:before {
+	color: #FFFFFF;
+}
+
+
 /* CONTENT */
 #content-wrapper {
 	margin-top: 145px;
 }
+
+/* FORM */
+table#renelems_contact {
+	width: 100%;
+	border-spacing: 0;
+}
+
+table tr td {
+	padding: 0;
+	vertical-align: top;
+}
+
+table#renelems_contact tr td:nth-child(2),
+table#renelems_contact tr td input,
+table#renelems_contact tr td select,
+table#renelems_contact tr td textarea {
+	width: 100%;
+}
+
+input, button, select, textarea {
+	border: none;
+	outline: none;
+}
+
+input, select, textarea {
+	padding: 8px 20px;
+	margin-top: 2px;
+	font-size: 16px;
+}
+
+textarea {
+	resize:vertical;
+}
+
+label {
+	width: 200px;
+	height: 42px;
+	padding: 5px 10px;
+	font-family: "OratorStd";
+	font-size: 20px;
+	font-weight: normal;
+	text-transform: uppercase;
+	margin-bottom: 10px;
+}
+
+#renelems_contact label {
+	background-color: #dcb84c;
+}
+
+label.arrow_box {
+	position: relative;
+	background: #dcb84c;
+	border: 2px solid #353230;
+}
+label.arrow_box:after, .arrow_box:before {
+	left: 100%;
+	top: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+label.arrow_box:after {
+	border-color: rgba(220, 184, 76, 0);
+	border-left-color: #dcb84c;
+	border-width: 10px;
+	margin-top: -10px;
+}
+label.arrow_box:before {
+	border-color: rgba(53, 50, 48, 0);
+	border-left-color: #353230;
+	border-width: 13px;
+	margin-top: -13px;
+}
+
+/* SIDEBAR */
+#contact-sidebar {
+	background-color: #DCB84C;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+#contact-sidebar p {
+	color: #353230;
+}
+
 
 /* FOOTER */
 #wrap {
