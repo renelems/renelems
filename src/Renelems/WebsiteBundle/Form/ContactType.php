@@ -14,10 +14,26 @@ class ContactType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', null, array('label'=>'Naam', 'required' => false, 'label_attr' => array('class' => 'arrow_box')))
+            ->add('name', null, array('label'=>'Naam', 'required' => false, 'label_attr' => array('class' => 'arrow_box'),
+	        		'constraints' => array(
+	            		
+	            	)
+        	))
             ->add('phone', 'number', array('label'=>'Telefoonnummer', 'required' => false, 'label_attr' => array('class' => 'arrow_box')))
-            ->add('email', 'email', array('label'=>'E-mailadres', 'required' => true, 'label_attr' => array('class' => 'arrow_box'), 'constraints' => array(new Assert\NotBlank(array('message' => 'Verplicht veld')))))
-            ->add('message', 'textarea', array('label'=>'Bericht', 'required' => true, 'attr' => array('rows' => '4'), 'label_attr' => array('class' => 'arrow_box'), 'constraints' => array(new Assert\NotBlank(array('message' => 'Verplicht veld')))))
+            ->add('email', 'email', array('label'=>'E-mailadres*', 'required' => true, 'label_attr' => array('class' => 'arrow_box'),
+            		'constraints' => array(
+            				new Assert\Email(array(
+            						'message' => 'Geen geldig e-mailadres',
+            						'checkMX' => true
+            				)),
+            				new Assert\NotBlank(array('message' => 'Verplicht veld'))
+            		)
+            ))
+            ->add('message', 'textarea', array('label'=>'Bericht*', 'required' => true, 'attr' => array('rows' => '4'), 'label_attr' => array('class' => 'arrow_box'),
+            		'constraints' => array(
+            				new Assert\NotBlank(array('message' => 'Verplicht veld'))
+            		)
+            ))
         	;
     }
 

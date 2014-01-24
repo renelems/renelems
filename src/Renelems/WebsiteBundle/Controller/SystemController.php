@@ -40,13 +40,14 @@ class SystemController extends Controller
     	
     	$oForm = $this->createForm(new ContactType());
     	
-    	$oForm->handleRequest($oRequest);
     	
-    	if($oForm->isValid()) {
-    		
-    		
-    		$this->get('session')->getFlashBag()->add('notice','Uw e-mail is verstuurd! Ik zal binnen enkele dagen contact met u opnemen.');
-    		return $this->redirect($this->generateUrl('renelems_contact'));
+    	
+    	if ($oRequest->isMethod('POST')) {
+    		$oForm->bind($oRequest);
+	    	if($oForm->isValid()) {
+	    		$this->get('session')->getFlashBag()->add('notice','Uw e-mail is verstuurd! Ik zal binnen enkele dagen contact met u opnemen.');
+	    		return $this->redirect($this->generateUrl('renelems_contact'));
+	    	}
     	}
     	
     	return array(

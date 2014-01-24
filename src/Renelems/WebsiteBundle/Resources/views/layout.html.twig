@@ -28,7 +28,7 @@
 			<ul class="pull-right">
 				<li class="green_bg pull-left"><a href="" class="{% if menu == 'service' %}active{% endif %}"><img src="{{ asset('/bundles/renelemswebsite/images/icons/services.png') }}" />Diensten</a></li>
 				<li class="blue_bg pull-left"><a href="" class="{% if menu == 'project' %}active{% endif %}"><img src="{{ asset('/bundles/renelemswebsite/images/icons/projects.png') }}" />Projecten</a></li>
-				<li class="yellow_bg pull-left"><a href="" class="{% if menu == 'contact' %}active{% endif %}"><img src="{{ asset('/bundles/renelemswebsite/images/icons/contact.png') }}" />Contact</a></li>
+				<li class="yellow_bg pull-left"><a href="{{ path('renelems_contact') }}" class="{% if menu == 'contact' %}active{% endif %}"><img src="{{ asset('/bundles/renelemswebsite/images/icons/contact.png') }}" />Contact</a></li>
 			</ul>
 		</div>
 		{% endblock %}
@@ -44,7 +44,7 @@
 </div>
 <div id="footer">
 	<div class="container">
-		<p class="pull-left contact-me">Contact me at: <a href="mailto:info@renelems.nl" class="underline"><strong>info@renelems.nl</strong></a></p>
+		<p class="pull-left contact-me">E-mail me via: <a href="mailto:info@renelems.nl" class="underline"><strong>info@renelems.nl</strong></a></p>
 		<ul class="pull-right" id="footer-menu">
 			<li><a href="{{ path('renelems_home') }}" class="home {% if menu == 'home' %}active{% endif %}">Home</a></li>
 			<li><a href="" class="service {% if menu == 'service' %}active{% endif %}">Diensten</a></li>
@@ -63,7 +63,7 @@
 			<img src="{{ asset('/bundles/renelemswebsite/images/icons/projects-left.png') }}" class="non-hover" />
 			<img src="{{ asset('/bundles/renelemswebsite/images/icons/projects-small.png') }}" class="hover" />
 		</a></li>
-		<li><a href="" class="contact {% if menu == 'contact' %}active{% endif %}">
+		<li><a href="{{ path('renelems_contact') }}" class="contact {% if menu == 'contact' %}active{% endif %}">
 			<img src="{{ asset('/bundles/renelemswebsite/images/icons/contact-left.png') }}" class="non-hover" />
 			<img src="{{ asset('/bundles/renelemswebsite/images/icons/contact-small.png') }}" class="hover" />
 		</a></li>
@@ -90,7 +90,18 @@
 		});
 		var random_color = colors[Math.floor(Math.random() * colors.length)];
 		$('#footer-menu li a.home.active').css('color', random_color);
-		
+
+
+		window.addEventListener("scroll", function() { 
+		   if(window.scrollY > 118) {
+			   $('#left-menu').stop();
+		       $('#left-menu').animate({ width: "75px" });
+		   }
+		   else {
+			   $('#left-menu').stop();
+			   $('#left-menu').animate({ width: "0px" });
+		   }
+		}, false);
 {% endblock %}
 </script>
 {% endblock %}
