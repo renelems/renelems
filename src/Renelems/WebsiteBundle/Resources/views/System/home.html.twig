@@ -1,1 +1,19 @@
 {% extends 'RenelemsWebsiteBundle::layout.html.twig' %}
+
+{% block content %}
+	<section>
+		<h2 class="green">{{ oServicePage.title }}</h2>
+		<p>{{ oServicePage.introduction }}</p>
+		<div class="text-right">
+			<a href="" class="btn green">De mogelijkheden</a>
+		</div>
+		
+	</section>
+	<section>
+		<h2 class="blue">Recente projecten</h2>
+		<p>{{ oServicePage.introduction }}</p>
+		<div class="text-right">
+			<a href="" class="btn blue">Alle projecten</a>
+		</div>
+	</section>
+{% endblock %}

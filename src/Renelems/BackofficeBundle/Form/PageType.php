@@ -20,7 +20,9 @@ class PageType extends AbstractType
     {
         $builder
             ->add('title', null, array('label'=>'Titel', 'required' => true, 'constraints' => array(new Assert\NotBlank(array('message' => 'Verplicht veld')))))
+            ->add('introduction', 'textarea', array('label'=>'Introductie', 'required' => true, 'constraints' => array(new Assert\NotBlank(array('message' => 'Verplicht veld')))))
             ->add('content', 'textarea', array('label'=>'Inhoud', 'required' => true, 'constraints' => array(new Assert\NotBlank(array('message' => 'Verplicht veld'))), 'attr' => array('class' => 'ckeditor', 'cols' => '30')))
+            ->add('isOnHomepage', 'checkbox', array('label'=>'Op homepage laten zien', 'required' => false))
         	;
     }
 

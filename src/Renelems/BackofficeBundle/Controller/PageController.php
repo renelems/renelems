@@ -113,7 +113,6 @@ class pageController extends Controller
             }
 			
             $editForm = $this->createForm(new PageType($entity), $entity);
-			$editForm->get('tags')->setData('');
             return array(
                 'entity'      => $entity,
                 'edit_form'   => $editForm->createView(),
