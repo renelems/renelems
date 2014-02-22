@@ -3,12 +3,16 @@
 {% block content %}
     <section>
         <h1 class="blue">Projecten</h1>
+        <ol class="breadcrumb">
+            <li><a href="{{ path('renelems_home') }}"><i class="fa fa-home"></i></a></li>
+            <li class="active">Projecten</li>
+        </ol>
 
         {% for project in aProject %}
         <h2>{{ project.title }}</h2>
         <p>{{ project.introduction }}</p>
         <div class="text-right">
-            <a href="" class="btn blue">naar project</a>
+            <a href="{{ path('renelems_project_detail', {'slug': project.slug}) }}" class="btn blue">naar project</a>
         </div>
         {% endfor %}
     </section>

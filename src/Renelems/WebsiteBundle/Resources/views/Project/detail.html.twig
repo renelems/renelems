@@ -1,0 +1,13 @@
+{% extends 'RenelemsWebsiteBundle::layout.html.twig' %}
+
+{% block content %}
+    <section>
+        <h1 class="blue">{{ oProject.title }}</h1>
+        <ol class="breadcrumb">
+            <li><a href="{{ path('renelems_home') }}"><i class="fa fa-home"></i></a></li>
+            <li><a href="{{ path('renelems_project') }}">Projecten</a></li>
+            <li class="active">{{ oProject.title }}</li>
+        </ol>
+
+    </section>
+{% endblock %}

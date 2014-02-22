@@ -33,30 +33,21 @@ class ProjectController extends Controller
     }
     
     /**
-     * @Route("/contact", name="renelems_contact")
+     * @Route("/{slug}", name="renelems_project_detail")
      * @Template()
      */
-    public function contactAction(Request $oRequest)
+    public function detailAction($slug)
     {
     	$oEm = $this->getDoctrine()->getManager();
-    	$oContactPage = $oEm->getRepository('RenelemsDBBundle:Page')->findOneBySlug('contact');
-    	
-    	$oForm = $this->createForm(new ContactType());
-    	
-    	
-    	
-    	if ($oRequest->isMethod('POST')) {
-    		$oForm->bind($oRequest);
-	    	if($oForm->isValid()) {
-	    		$this->get('session')->getFlashBag()->add('notice','Uw e-mail is verstuurd! Ik zal binnen enkele dagen contact met u opnemen.');
-	    		return $this->redirect($this->generateUrl('renelems_contact'));
-	    	}
-    	}
-    	
+    	$oProject = $oEm->getRepository('RenelemsDBBundle:Project')->findOneBySlug($slug);
+
+        if(!$oProject) {
+            new $this->createNotFoundException("Unable to find project");
+        }
+
     	return array(
-    			'oContactPage'		=> $oContactPage,
-    			'oForm' 			=> $oForm->createView(),
-    			'menu'         		=> 'contact',
+    			'oProject'		    => $oProject,
+    			'menu'         		=> 'project',
     			'seo_title'			=> 'Vrijblijvende informatie over website',
     			'seo_description'	=> '',
     	);
