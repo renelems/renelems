@@ -7,11 +7,11 @@ body {
 
 @font-face {
     font-family: 'OratorStd';
-    src: url('/bundles/renelemswebsite/font/oratorstd.eot');
-    src: url('/bundles/renelemswebsite/font/oratorstd.eot') format('embedded-opentype'),
-         url('/bundles/renelemswebsite/font/oratorstd.woff') format('woff'),
-         url('/bundles/renelemswebsite/font/oratorstd.ttf') format('truetype'),
-         url('/bundles/renelemswebsite/font/oratorstd.svg#OratorStdMedium') format('svg');
+    src: url('/bundles/renelemswebsite/fonts/oratorstd.eot');
+    src: url('/bundles/renelemswebsite/fonts/oratorstd.eot') format('embedded-opentype'),
+         url('/bundles/renelemswebsite/fonts/oratorstd.woff') format('woff'),
+         url('/bundles/renelemswebsite/fonts/oratorstd.ttf') format('truetype'),
+         url('/bundles/renelemswebsite/fonts/oratorstd.svg#OratorStdMedium') format('svg');
 }
 
 h1 {

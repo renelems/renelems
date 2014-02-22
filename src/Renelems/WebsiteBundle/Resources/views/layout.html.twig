@@ -27,7 +27,7 @@
 			<h1 class="pull-left logo"><a href="{{ path('renelems_home') }}" id="home_btn">ReneLems.nl</a></h1>
 			<ul class="pull-right">
 				<li class="green_bg pull-left"><a href="" class="{% if menu == 'service' %}active{% endif %}"><img src="{{ asset('/bundles/renelemswebsite/images/icons/services.png') }}" />Diensten</a></li>
-				<li class="blue_bg pull-left"><a href="" class="{% if menu == 'project' %}active{% endif %}"><img src="{{ asset('/bundles/renelemswebsite/images/icons/projects.png') }}" />Projecten</a></li>
+				<li class="blue_bg pull-left"><a href="{{ path('renelems_project') }}" class="{% if menu == 'project' %}active{% endif %}"><img src="{{ asset('/bundles/renelemswebsite/images/icons/projects.png') }}" />Projecten</a></li>
 				<li class="yellow_bg pull-left"><a href="{{ path('renelems_contact') }}" class="{% if menu == 'contact' %}active{% endif %}"><img src="{{ asset('/bundles/renelemswebsite/images/icons/contact.png') }}" />Contact</a></li>
 			</ul>
 		</div>
@@ -48,7 +48,7 @@
 		<ul class="pull-right" id="footer-menu">
 			<li><a href="{{ path('renelems_home') }}" class="home {% if menu == 'home' %}active{% endif %}">Home</a></li>
 			<li><a href="" class="service {% if menu == 'service' %}active{% endif %}">Diensten</a></li>
-			<li><a href="" class="project {% if menu == 'project' %}active{% endif %}">Projecten</a></li>
+			<li><a href="{{ path('renelems_project') }}" class="project {% if menu == 'project' %}active{% endif %}">Projecten</a></li>
 			<li><a href="{{ path('renelems_contact') }}" class="contact {% if menu == 'contact' %}active{% endif %}">Contact</a></li>
 		</ul>
 	</div>
@@ -59,7 +59,7 @@
 			<img src="{{ asset('/bundles/renelemswebsite/images/icons/services-left.png') }}" class="non-hover" />
 			<img src="{{ asset('/bundles/renelemswebsite/images/icons/services-small.png') }}" class="hover" />
 		</a></li>
-		<li><a href="" class="project {% if menu == 'project' %}active{% endif %}">
+		<li><a href="{{ path('renelems_project') }}" class="project {% if menu == 'project' %}active{% endif %}">
 			<img src="{{ asset('/bundles/renelemswebsite/images/icons/projects-left.png') }}" class="non-hover" />
 			<img src="{{ asset('/bundles/renelemswebsite/images/icons/projects-small.png') }}" class="hover" />
 		</a></li>
